@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icono_pagina.png">
+    <title>Lista de compras</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-inner">
+            <p>¿Estás en el restaurante?</p>
+            <button id="btn-yes">SÍ</button>
+            <button id="btn-no">NO</button>
+        </div>
+    </div>
+</div>
+
+
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="img/icono_pagina.png" class="logo-img">
+            <p class="logo-nombre">Pedido</p>
+        </a>
+        <a href="index.php" class="dropdown-menu">
+            <i class="fas fa-home"></i>
+            Inicio
+        </a>
+    </header>
+
+    <div class="container_compra">
+        <div class="customer-info">
+            <h1 class="title">Detalles de la Compra</h1>
+
+            <!-- Formulario de información del cliente -->
+            <form id="customer-info-form" method="POST" action="php/guardar_cliente.php">
+
+                <div class="form-group">
+                    <label for="nombre">Nombres:</label>
+                    <input type="text" id="nombre" name="nombre" value="" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellidos:</label>
+                    <input type="text" id="apellido" name="apellido" value="" required>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" value="" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Número de Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" value="" required>
+                </div>
+                <input type="hidden" id="productos-input" name="productos" value="">
+                <button type="submit" name="btn-agregar" id="btn-agregar">Finalizar pedido</button>
+            </form>
+        </div>
+        <div class="customer-info1">
+            <div class="customer-info1">
+
+                <h2 class="title">Lista del pedido</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio unitario</th>
+                            <th>Cantidad</th>
+                            <th>Comentario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-list">
+                        <!-- Aquí se mostrarán los productos -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Total:</td>
+                            <td id="total"></td>
+                        </tr>
+                        
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <style>
+        .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Asegura que esté por encima de otros elementos */
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup-inner {
+    max-width: 400px; /* Ajusta el ancho máximo según tus necesidades */
+    margin: 0 auto; /* Centra horizontalmente */
+}
+
+/* Estilos para los botones */
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    background: #9CCB9E;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #135337;
+}
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const popup = document.getElementById("popup");
+            const btnYes = document.getElementById("btn-yes");
+            const btnNo = document.getElementById("btn-no");
+
+            // Mostrar el popup al cargar la página
+            popup.style.display = "block";
+
+            btnYes.addEventListener("click", function () {
+                // Acciones cuando el usuario selecciona "SÍ"
+                popup.style.display = "none";
+
+                // Cambiar el texto del label "Dirección" a "Mesa"
+                document.querySelector('label[for="direccion"]').textContent = "Mesa:";
+            });
+
+            btnNo.addEventListener("click", function () {
+                // Aquí puedes realizar acciones cuando el usuario selecciona "NO"
+                popup.style.display = "none";
+            });
+        });
+        
+
+
+        const productList = document.getElementById('product-list');
+        const totalElement = document.getElementById('total');
+
+
+        // Recuperar parámetros de la URL
+        const params = new URLSearchParams(window.location.search);
+        const products = [];
+
+        const secretKey = 'kjhJHFasadb';
+
+        const encryptedCartContents = localStorage.getItem('cartContents');
+        const decryptedData = CryptoJS.AES.decrypt(encryptedCartContents, secretKey);
+        const cartContents_data = JSON.parse(decryptedData.toString(CryptoJS.enc.Utf8));
+        const cartContents = cartContents_data || [];
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            cartContents.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${product.name}</td>
+                <td>$${product.price.toFixed(3)}</td>
+                <td>${product.quantity}</td>
+                <td>${product.Textarea}</td>
+                <td>$${(product.price * product.quantity).toFixed(3)}</td>
+                
+                `;
+                productList.appendChild(row);
+            });
+        });
+        
+
+        // Calcular y mostrar el total
+        const total = cartContents.reduce((acc, product) => acc + (product.price * product.quantity), 0);
+        totalElement.textContent = `$${total.toFixed(3)}`;
+
+
+        // Obtén los datos del formulario y los detalles del carrito
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const direccion = document.getElementById('direccion').value;
+        const telefono = document.getElementById('telefono').value;
+        
+
+        const detallesCompra = {
+            nombre: nombre,
+            apellido: apellido,
+            direccion: direccion,
+            telefono: telefono,
+            products: cartContents
+        };
+
+
+        // Convierte el objeto a JSON
+        const detallesCompraJSON = JSON.stringify(detallesCompra);
+
+        // Asigna el JSON al campo oculto
+        const productosInput = document.getElementById('productos-input');
+        productosInput.value = detallesCompraJSON;
+
+
+        window.addEventListener('beforeunload', () => {
+            localStorage.removeItem('cartContents');
+        });
+        
+
+
+    </script>
+
+</body>
+
+</html>

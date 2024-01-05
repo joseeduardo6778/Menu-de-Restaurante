@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+:root {
+    --color1: #135337;
+    --color2: #9CCB9E;
+    --color3: #30303F;
+    --fondo: #F5F7F9;
+    --border: #C9C6C6;
+    --color: #74b4a3;
+    
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--fondo);
+}
+.container_listapedidos {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px #0000001a;
+    margin: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--color);
+    color: #fff;
+}
+
+th, td {
+    font-size: 14px;
+}
+
+h2 {
+    color: var(--color3);
+    padding: 5px;
+}
+h1{
+    text-align: center;
+    color: var(--color1)
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: url(../img/background1.jpg);
+    color: #fff;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+}
+
+.logo-img {
+    width: 40px;
+    /* Tamaño de la imagen del logo */
+    height: 40px;
+    /* Tamaño de la imagen del logo */
+    margin-right: 10px;
+    /* Espaciado entre la imagen y el texto */
+}
+
+.logo-nombre {
+    font-size: 24px;
+    /* Tamaño del texto del nombre */
+}
+.dropdown-menu {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.dropdown-menu:hover {
+    background-color: #555;
+}
+

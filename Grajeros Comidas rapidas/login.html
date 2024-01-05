@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Inicio de sesion</title>
+    <link rel="shortcut icon" href="img/icono_pagina.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="./css/estiloLogin.css">
+    <script src="login.js"></script>
+    
+
+</head>
+
+
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="img/icono_pagina.png" class="logo-img">
+            <p class="logo-nombre">Inicio de sesion</p>
+        </a>
+        <a href="index.html" class="dropdown-menu">
+            <i class="fas fa-home"></i>
+            Inicio
+        </a>
+    </header>
+    <section>
+        <div class="box">
+            <div class="container">
+                <form action="php/verificar_login.php" method="post">
+        
+                <div class="top">
+                    
+                    <div class="Encabezado">Login</div>
+                </div>
+                <div class="input-field">
+                    <i class="fa fa-unlock-user"></i>
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuario">
+                    <i class='bx bx-user' ></i>
+                </div>
+        
+                <div class="input-field">
+                    <input type="Password" id="pass" name="pass" placeholder="Contraseña">
+                    <i class='bx bx-lock-alt'></i>
+                </div>
+        
+                <div class="input-field">
+                    <input type="submit" class="submit" value="Iniciar Sesion">
+                </div>
+        
+                </form>
+            </div>
+        </div> 
+    </section>
+       
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="js/popup.js"></script>
+    
+    
+</body>
+</html>

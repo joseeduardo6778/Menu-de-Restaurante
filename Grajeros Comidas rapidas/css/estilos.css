@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* header*/
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Montserrat Alternates',sans-serif;
+}
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 70px;
+    background: url(../img/background1.jpg);
+    
+}
+.logo{
+    display: flex;
+    align-items: center;
+    padding: 20px 10px;
+}
+.logo img{
+    height: 80px;
+    margin-right: 15px;
+}
+.logo-nombre{
+    font-size: 1.3em;
+}
+nav{
+    margin-left: 50px;
+    padding-bottom: 15px;
+    background: url(../img/background1.jpg);
+}
+nav a{
+    padding-left: 10px;
+    color: white;
+    font-family: 'Montserrat Alternates',sans-serif;
+}
+nav a:hover{
+    color:#56b4d3;
+    text-decoration: underline;
+    font-family: 'Montserrat Alternates',sans-serif;
+}
+
+@media (min-width:600px){
+    header{
+        flex-direction: row;
+        padding: 0px 30px;
+        justify-content: space-between;
+    }
+}
+
+/*Formulario*/
+form .grupo{
+    position: relative;
+    margin: 0px;
+
+}
+label{
+    font-size: 16px;
+}
+
+#btn-agregar{
+    width: 100% !important;
+    position: relative;
+    height: 50px;
+    font-size: 16px;
+}
+
+/* Estilo para el select */
+select#tipo_producto {
+    width: 100%; /* Ancho del select */
+    padding: 10px; /* Relleno interno */
+    font-size: 16px; /* Tamaño de fuente */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 5px; /* Borde redondeado */
+    background-color: #f8f8f8; /* Color de fondo */
+    color: #333; /* Color de texto */
+    cursor: pointer; /* Cursor al pasar sobre el select */
+  }
+  
+  /* Estilo para las opciones dentro del select */
+  select#tipo_producto option {
+    padding: 10px; /* Relleno interno de las opciones */
+    font-size: 16px; /* Tamaño de fuente de las opciones */
+  }
+  
